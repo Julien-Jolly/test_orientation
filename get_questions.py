@@ -4,7 +4,7 @@ import json
 
 q_a = {}
 
-for i in range(30):
+for i in range(5):
     url=f"https://www.letudiant.fr/test/metiers/orientation/pour-quels-metiers-etes-vous-fait/question-{i+1}.html"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
