@@ -8,7 +8,7 @@ with open("questions.json", "r") as f:
 with open("riasec.json", "r") as f:
     riasec_mapping = json.load(f)
 
-with open("descriptions.json", "r") as f:
+with open("riasec_descriptions.json", "r") as f:
     descriptions = json.load(f)
 
 # Variables
