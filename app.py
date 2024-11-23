@@ -52,7 +52,6 @@ if st.button("Soumettre"):
         if profile_combination in descriptions:
             description_text = descriptions[profile_combination]['description']
             # Affichage du texte sans accolades ni "description:"
-            st.markdown(f"**Votre profil :** {profile_combination}")
             st.markdown(description_text, unsafe_allow_html=True)
         else:
             st.error(f"Aucune description disponible pour le profil : {profile_combination}.")
