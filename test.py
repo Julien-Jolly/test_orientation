@@ -1,14 +1,16 @@
 import json
 import streamlit as st
 
-# Charger les fichiers nécessaires
+# Charger les questions depuis questions.json
 with open("questions.json", "r") as f:
     questions = json.load(f)
 
+# Charger le mapping RIASEC depuis riasec.json
 with open("riasec.json", "r") as f:
     riasec_mapping = json.load(f)
 
-with open("descriptions.json", "r") as f:
+# Charger les descriptions RIASEC
+with open("riasec_descriptions.json", "r") as f:
     descriptions = json.load(f)
 
 # Variables
@@ -21,11 +23,15 @@ st.title("Test d'Orientation RIASEC")
 # Collecte des réponses
 st.subheader("Répondez aux questions ci-dessous :")
 for question, answers in questions.items():
+    # Gérer les réponses avec une valeur par défaut vide
+    if question not in st.session_state:
+        st.session_state[question] = None
+
     response = st.radio(
         question,
-        options=list(answers.keys()),
+        options=[None] + list(answers.keys()),  # Ajouter une option vide au début
+        format_func=lambda x: x if x else "Sélectionnez une réponse",  # Texte pour l'option vide
         key=question,
-        format_func=lambda x: x if x else "Sélectionnez une réponse"
     )
     responses[question] = response
 
@@ -47,12 +53,9 @@ if st.button("Soumettre"):
         # Construire le profil combiné
         profile_combination = "".join(sorted_riasec)
 
-        # Afficher le résultat sans accolades et sans "description"
+        # Afficher le résultat
         st.subheader("Résultats du test RIASEC")
         if profile_combination in descriptions:
-            description_text = descriptions[profile_combination]['description']
-            # Affichage du texte sans accolades ni "description:"
-            st.markdown(f"**Votre profil :** {profile_combination}")
-            st.markdown(description_text, unsafe_allow_html=True)
+            st.write(descriptions[profile_combination])
         else:
             st.error(f"Aucune description disponible pour le profil : {profile_combination}.")

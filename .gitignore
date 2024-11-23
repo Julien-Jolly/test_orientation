@@ -1,4 +1,4 @@
 .idea/
 venv/
-questions.json
 *.csv
+get_questions.py
