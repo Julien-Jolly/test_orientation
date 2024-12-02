@@ -22,21 +22,6 @@ whatsapp_link = f"https://wa.me/{whatsapp_number}?text={whatsapp_message}"
 st.markdown(
     """
     <style>
-    
-        /* Garder la sidebar fixée à gauche et l'empêcher d'être rétractée */
-        .css-1d391kg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;  /* Largeur de la sidebar */
-            height: 100vh;  /* Hauteur à 100% de la fenêtre */
-            z-index: 1000;
-        }
-        
-        /* Fixer l'espace pour le contenu principal, laissant de la place à la sidebar */
-        .css-1v3fvcr {
-            margin-left: 250px;  /* Créer un espace pour la sidebar */
-        }
         
         /* Bandeau fixe en bas, couleur blanche */
         .whatsapp-btn-container {
@@ -111,22 +96,26 @@ st.sidebar.markdown(
     """, unsafe_allow_html=True
 )
 
-st.title("Test d'Orientation RIASEC")
+st.title("Test d'Orientation")
 
 # Code pour gérer les questions et afficher les résultats
 st.markdown("<br><br>", unsafe_allow_html=True)
 
 for question, answers in questions.items():
+    st.markdown(
+        f"<div style='font-size: 1,2rem; font-weight: bold; margin-bottom: 5px;'>{question}</div>",
+        unsafe_allow_html=True
+    )
     options = [answers["reponse 1"], answers["reponse 2"]]  # Liste des réponses textuelles
     response = st.radio(
-        question,
+        "label",
         options=options,
         key=question,
-        format_func=lambda x: x if x else "Sélectionnez une réponse"
+        format_func=lambda x: x if x else "Sélectionnez une réponse",
+        label_visibility="hidden"
     )
     responses[question] = response
-    st.markdown("<br>", unsafe_allow_html=True)
-    print(responses)
+    st.markdown("<br><br>", unsafe_allow_html=True)
 
 if st.button("Soumettre"):
     if None in responses.values():
