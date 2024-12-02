@@ -25,17 +25,17 @@ st.markdown(
 
         /* Bandeau fixe en bas, couleur blanche */
         .whatsapp-btn-container {
+            display: flex;
+            justify-content: center;  /* Centrer horizontalement */
+            align-items: center;      /* Centrer verticalement */
+            padding: 15px 20px;       /* Espacement autour */
+            background-color: #ffffff;  /* Fond blanc */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);  /* Ombre légère */
+            z-index: 100;
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #ffffff;  /* Fond blanc */
-            padding: 15px 20px;  /* Ajouter un peu d'espace autour */
-            display: flex;
-            justify-content: flex-end;  /* Aligner le texte et l'icône à droite */
-            align-items: center;
-            z-index: 100;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);  /* Ombre légère pour le bandeau */
         }
 
         .whatsapp-btn-container .whatsapp-text {
@@ -65,7 +65,7 @@ st.markdown(
         /* Responsivité du texte */
         @media only screen and (max-width: 600px) {
             body {
-                font-size: 14px;
+                font-size: 12px;
             }
         }
 
