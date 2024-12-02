@@ -103,7 +103,7 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 
 for question, answers in questions.items():
     st.markdown(
-        f"<div style='font-size: 1,2rem; font-weight: bold; margin-bottom: 5px;'>{question}</div>",
+        f"<div style='font-size: 2rem; font-weight: bold; margin-bottom: 5px;'>{question}</div>",
         unsafe_allow_html=True
     )
     options = [answers["reponse 1"], answers["reponse 2"]]  # Liste des réponses textuelles
