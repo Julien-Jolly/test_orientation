@@ -22,7 +22,22 @@ whatsapp_link = f"https://wa.me/{whatsapp_number}?text={whatsapp_message}"
 st.markdown(
     """
     <style>
-
+    
+        /* Garder la sidebar fixée à gauche et l'empêcher d'être rétractée */
+        .css-1d391kg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;  /* Largeur de la sidebar */
+            height: 100vh;  /* Hauteur à 100% de la fenêtre */
+            z-index: 1000;
+        }
+        
+        /* Fixer l'espace pour le contenu principal, laissant de la place à la sidebar */
+        .css-1v3fvcr {
+            margin-left: 250px;  /* Créer un espace pour la sidebar */
+        }
+        
         /* Bandeau fixe en bas, couleur blanche */
         .whatsapp-btn-container {
             display: flex;
@@ -102,27 +117,48 @@ st.title("Test d'Orientation RIASEC")
 st.markdown("<br><br>", unsafe_allow_html=True)
 
 for question, answers in questions.items():
+    options = [answers["reponse 1"], answers["reponse 2"]]  # Liste des réponses textuelles
     response = st.radio(
         question,
-        options=list(answers.keys()),
+        options=options,
         key=question,
         format_func=lambda x: x if x else "Sélectionnez une réponse"
     )
     responses[question] = response
+    st.markdown("<br>", unsafe_allow_html=True)
+    print(responses)
 
 if st.button("Soumettre"):
     if None in responses.values():
         st.warning("Veuillez répondre à toutes les questions avant de soumettre.")
     else:
+        # Réinitialiser les scores RIASEC
+        riasec_scores = {key: 0 for key in riasec_scores}
+
         for question, response in responses.items():
-            riasec_type = riasec_mapping[question][response]
-            riasec_scores[riasec_type] += 1
+            # Trouver la clé ("reponse 1" ou "reponse 2") associée à la réponse textuelle
+            response_key = next(
+                (key for key, value in questions[question].items() if value == response),
+                None
+            )
 
+            # Récupérer le type RIASEC associé à cette réponse
+            if response_key:
+                riasec_type = riasec_mapping[question].get(response_key)
+                if riasec_type:
+                    riasec_scores[riasec_type] += 1
+
+        # Calcul des pourcentages RIASEC
         total_responses = sum(riasec_scores.values())
-        riasec_percentages = {key: (value / total_responses) * 100 for key, value in riasec_scores.items()}
+        if total_responses > 0:
+            riasec_percentages = {key: (value / total_responses) * 100 for key, value in riasec_scores.items()}
+        else:
+            riasec_percentages = {key: 0 for key in riasec_scores}
 
+        # Tri des types RIASEC par pourcentage décroissant
         sorted_riasec = sorted(riasec_percentages.items(), key=lambda x: x[1], reverse=True)
 
+        # Afficher les résultats
         st.subheader("Résultats du test")
 
         labels = [riasec_type for riasec_type, _ in sorted_riasec]
@@ -149,7 +185,7 @@ if st.button("Soumettre"):
             st.markdown(f"### {riasec_type} : {int(percentage)}%")
             st.write(description, unsafe_allow_html=True)
 
-            st.markdown("#### Métiers correspondant :")
+            st.markdown(f"#### Métiers correspondants au profil {riasec_type}:")
             for metier in riasec_descriptions[riasec_type]["metiers"]:
                 st.markdown(f"- {metier}")
 

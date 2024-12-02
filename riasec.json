@@ -5,14 +5,14 @@
     },
     "question n°2 : Vous passez des vacances à 15 dans un appartement à la mer :": {
         "reponse 1": "Social",
-        "reponse 2": "Investigateur"
+        "reponse 2": "Entreprenant"
     },
     "question n°3 : J'aime...": {
         "reponse 1": "Artiste",
         "reponse 2": "Réaliste"
     },
     "question n°4 : Dans votre métier plus tard vous voulez :": {
-        "reponse 1": "Réaliste",
+        "reponse 1": "Méthodique",
         "reponse 2": "Investigateur"
     },
     "question n°5 : Vous avez deux heures pour une activité dans la semaine, vous choisissez plutôt :": {
@@ -32,7 +32,7 @@
         "reponse 2": "Entreprenant"
     },
     "question n°9 : Face une situation :": {
-        "reponse 1": "Investigateur",
+        "reponse 1": "Méthodique",
         "reponse 2": "Réaliste"
     },
     "question n°10 : Dans l'équipe sportive :": {
@@ -53,7 +53,7 @@
     },
     "question n°14 : Votre truc, c'est plutôt :": {
         "reponse 1": "Social",
-        "reponse 2": "Investigateur"
+        "reponse 2": "Méthodique"
     },
     "question n°15 : Vous travaillez dans la finance :": {
         "reponse 1": "Entreprenant",
@@ -65,7 +65,7 @@
     },
     "question n°17 : Ce qui vous caractérise le plus :": {
         "reponse 1": "Social",
-        "reponse 2": "Réaliste"
+        "reponse 2": "Artiste"
     },
     "question n°18 : Votre association propose un stand de vente sur un festival :": {
         "reponse 1": "Entreprenant",
@@ -76,7 +76,7 @@
         "reponse 2": "Entreprenant"
     },
     "question n°20 : Le groupe de mots qui vous correspond le mieux :": {
-        "reponse 1": "Réaliste",
+        "reponse 1": "Artiste",
         "reponse 2": "Méthodique"
     },
     "question n°21 : Vous partiriez plus volontiers six mois :": {
@@ -100,7 +100,7 @@
         "reponse 2": "Artiste"
     },
     "question n°26 : Ce qui vous correspond le mieux :": {
-        "reponse 1": "Investigateur",
+        "reponse 1": "Entreprenant",
         "reponse 2": "Social"
     },
     "question n°27 : Vous diriez plutôt :": {
