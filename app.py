@@ -12,9 +12,9 @@ with open("riasec_descriptions.json", "r") as f:
     riasec_descriptions = json.load(f)
 
 responses = {}
-riasec_scores = {"Réaliste": 0, "Investigateur": 0, "Artiste": 0, "Social": 0, "Entreprenant": 0, "Méthodique": 0}
+riasec_scores = {"Réaliste": 0, "Investigateur": 0, "Artiste": 0, "Social": 0, "Entreprenant": 0, "Conventionnel": 0}
 
-whatsapp_number = "+212657928301"
+whatsapp_number = "+212660241204"
 whatsapp_message = "Bonjour, j'aimerais en savoir plus!"
 whatsapp_link = f"https://wa.me/{whatsapp_number}?text={whatsapp_message}"
 
@@ -90,7 +90,7 @@ st.sidebar.markdown(
     - **Artiste** : Recherche des opportunités créatives, souvent dans des domaines comme l'art, la musique ou l'écriture.
     - **Social** : Préfère aider et interagir avec les autres, souvent dans des rôles éducatifs, sociaux ou de conseil.
     - **Entreprenant** : Aime influencer et diriger les autres, souvent dans des environnements de vente ou de gestion.
-    - **Conventionnel** : Aussi appelé "Méthodique", préfère des tâches organisées et structurées, souvent liées à la gestion, l'administration ou l'informatique.
+    - **Conventionnel** : Aussi appelé "Conventionnel", préfère des tâches organisées et structurées, souvent liées à la gestion, l'administration ou l'informatique.
 
     Ce test vous aidera à découvrir quel profil RIASEC correspond le mieux à vos intérêts et à vos compétences professionnelles.
     """, unsafe_allow_html=True
@@ -168,10 +168,11 @@ if st.button("Soumettre"):
         st.plotly_chart(fig)
 
         for riasec_type, percentage in sorted_riasec:
+            prc_reponses=f"{int(percentage):}%"
             description = riasec_descriptions[riasec_type]["description"].format(
-                prc_reponses=f"{percentage:.2f}%"
+                prc_reponses=prc_reponses
             )
-            st.markdown(f"### {riasec_type} : {int(percentage)}%")
+            st.markdown(f"### {riasec_type} : {prc_reponses}")
             st.write(description, unsafe_allow_html=True)
 
             st.markdown(f"#### Métiers correspondants au profil {riasec_type}:")
