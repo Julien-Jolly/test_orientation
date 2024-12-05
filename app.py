@@ -2,6 +2,13 @@ import json
 import streamlit as st
 import plotly.graph_objects as go
 
+st.set_page_config(
+    page_title="Mon Application",  # Titre de la page
+    page_icon=":rocket:",  # Icône dans l'onglet du navigateur
+    layout="wide",  # Disposition large
+    initial_sidebar_state="expanded"  # Sidebar ouverte par défaut
+)
+
 with open("questions.json", "r") as f:
     questions = json.load(f)
 
@@ -22,56 +29,67 @@ whatsapp_link = f"https://wa.me/{whatsapp_number}?text={whatsapp_message}"
 st.markdown(
     """
     <style>
-        
-        /* Bandeau fixe en bas, couleur blanche */
+        /* Bandeau fixe en bas */
         .whatsapp-btn-container {
-            display: flex;
-            justify-content: center;  /* Centrer horizontalement */
-            align-items: center;      /* Centrer verticalement */
-            padding: 15px 20px;       /* Espacement autour */
+            display: flex;              /* Disposition horizontale des éléments */
+            align-items: center;        /* Alignement vertical centré */
+            padding: 20px;              /* Espacement interne */
             background-color: #ffffff;  /* Fond blanc */
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);  /* Ombre légère */
             z-index: 100;
             position: fixed;
             bottom: 0;
-            left: 0;
-            width: 100%;
+            left: 0;                    /* Le bandeau reste collé au bord gauche */
+            width: 100%;                /* Bandeau pleine largeur */
+            height: 80px;               /* Hauteur ajustée */
         }
 
-        .whatsapp-btn-container .whatsapp-text {
-            font-size: 16px;  /* Taille du texte */
-            color: #25D366;   /* Couleur verte de WhatsApp */
-            margin-right: 10px;  /* Espacement entre le texte et l'icône */
+        /* Conteneur du contenu pour décaler logo et texte */
+        .whatsapp-content {
+            display: flex;              /* Disposition horizontale des éléments */
+            align-items: center;        /* Centrer verticalement les éléments */
+            margin-left: 660px;         /* Décalage pour éviter la sidebar */
+        }
+        
+         /* Modifier le fond de la page entière */
+        .main {
+            background-color: #f2f2f2; /* Fond gris clair */
+            padding: 20px; /* Ajout d'un espace autour du contenu principal */
+            border-radius: 8px; /* Optionnel : coins arrondis */
+        }
+        
+        /* Modifier la largeur de la sidebar */
+        section[data-testid="stSidebar"] {
+            min-width: 450px; /* Largeur minimale */
+            max-width: 450px; /* Largeur maximale */
+        }
+        
+        .whatsapp-content img {
+            width: 50px;                /* Taille du logo */
+            height: 50px;
+            margin-right: 15px;         /* Espacement entre le logo et le texte */
         }
 
-        .whatsapp-btn-container a {
-            display: block;
+        .whatsapp-content .whatsapp-text {
+            font-size: 16px;            /* Taille du texte */
+            color: #25D366;             /* Couleur verte de WhatsApp */
+            text-align: left;           /* Alignement du texte à gauche */
         }
 
-        /* Réduire la taille de l'image WhatsApp */
-        .whatsapp-btn-container img {
-            width: 60px;  /* Taille ajustée */
-            height: 60px;
-        }
-
-        /* Adapter le texte pour les mobiles */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1;
-            margin-bottom: 80px;  /* Laisser de l'espace pour le bandeau */
-            margin-top: 80px; /* Laisser de l'espace pour le bandeau en haut */
-        }
-
-        /* Responsivité du texte */
+        /* Ajustement pour petits écrans */
         @media only screen and (max-width: 600px) {
-            body {
-                font-size: 12px;
+            .whatsapp-content {
+                margin-left: 0;         /* Pas de décalage si la sidebar est masquée */
             }
-        }
 
-        /* Ajouter un espacement entre les sections */
-        .content-section {
-            margin-bottom: 40px;
+            .whatsapp-content img {
+                width: 40px;            /* Réduction de la taille du logo */
+                height: 40px;
+            }
+
+            .whatsapp-content .whatsapp-text {
+                font-size: 14px;        /* Réduction de la taille du texte */
+            }
         }
     </style>
     """, unsafe_allow_html=True
@@ -185,10 +203,14 @@ if st.button("Soumettre"):
 st.markdown(
     f"""
     <div class="whatsapp-btn-container">
-        <div class="whatsapp-text">Discutons de vos résultats sur WhatsApp et trouvons votre plan d'orientation idéal</div>
-        <a href="{whatsapp_link}" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-        </a>
+        <div class="whatsapp-content">
+            <a href="{whatsapp_link}" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+            </a>
+            <div class="whatsapp-text">
+                Discutons de vos résultats sur WhatsApp et trouvons votre plan d'orientation idéal
+            </div>
+        </div>
     </div>
     """,
     unsafe_allow_html=True
